@@ -1,0 +1,10 @@
+{
+	"fileVersion": 1,
+	"versions": {
+		"derelict-util": "1.9.1",
+		"dgame": "~master",
+		"derelict-sdl2": "1.9.4",
+		"m3": "0.0.6",
+		"derelict-gl3": "1.0.12"
+	}
+}

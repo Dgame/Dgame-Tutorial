@@ -1,0 +1,120 @@
+{
+    "name":         "Dgame Tutorial",
+    "description":  "A 2D framework for the D programming Language",
+    "homepage":     "http://dgame-dev.de",
+    "authors":  	["Randy Schütt"],
+    "license":      "Zlib/PNG License",
+    "dependencies": {
+        "dgame": "~master"
+    },
+    "configurations": [
+        {
+            "name": "app_duration",
+            "targetName": "dgame-example",
+            "targetType": "executable",
+            "sourceFiles": ["tutorials/app_duration.d"]
+        },
+        {
+            "name": "battery",
+            "targetName": "dgame-example",
+            "targetType": "executable",
+            "sourceFiles": ["tutorials/battery.d"]
+        },
+        {
+            "name": "create_a_window",
+            "targetName": "dgame-example",
+            "targetType": "executable",
+            "sourceFiles": ["tutorials/create_a_window.d"]
+        },
+        {
+            "name": "create_window_with_icon1",
+            "targetName": "dgame-example",
+            "targetType": "executable",
+            "sourceFiles": ["tutorials/create_window_with_icon1.d"]
+        },
+        {
+            "name": "create_window_with_icon2",
+            "targetName": "dgame-example",
+            "targetType": "executable",
+            "sourceFiles": ["tutorials/create_window_with_icon2.d"]
+        },
+        {
+            "name": "game_loop_event_handling1",
+            "targetName": "dgame-example",
+            "targetType": "executable",
+            "sourceFiles": ["tutorials/game_loop_event_handling1.d"]
+        },
+        {
+            "name": "game_loop_event_handling2",
+            "targetName": "dgame-example",
+            "targetType": "executable",
+            "sourceFiles": ["tutorials/game_loop_event_handling2.d"]
+        },
+        {
+            "name": "gl_settings",
+            "targetName": "dgame-example",
+            "targetType": "executable",
+            "sourceFiles": ["tutorials/gl_settings.d"]
+        },
+        {
+            "name": "image_sprites",
+            "targetName": "dgame-example",
+            "targetType": "executable",
+            "sourceFiles": ["tutorials/image_loading_and_sprites.d"]
+        },
+        {
+            "name": "image_sprites_bounce",
+            "targetName": "dgame-example",
+            "targetType": "executable",
+            "sourceFiles": ["tutorials/image_loading_and_sprites_bounce.d"]
+        },
+        {
+            "name": "load_font_draw_text",
+            "targetName": "dgame-example",
+            "targetType": "executable",
+            "sourceFiles": ["tutorials/load_font_draw_text.d"]
+        },
+        {
+            "name": "shape_texturing1",
+            "targetName": "dgame-example",
+            "targetType": "executable",
+            "sourceFiles": ["tutorials/shape_texturing1.d"]
+        },
+        {
+            "name": "shape_texturing2",
+            "targetName": "dgame-example",
+            "targetType": "executable",
+            "sourceFiles": ["tutorials/shape_texturing2.d"]
+        },
+        {
+            "name": "shapes",
+            "targetName": "dgame-example",
+            "targetType": "executable",
+            "sourceFiles": ["tutorials/shapes.d"]
+        },
+        {
+            "name": "sound",
+            "targetName": "dgame-example",
+            "targetType": "executable",
+            "sourceFiles": ["tutorials/sound.d"]
+        },
+        {
+            "name": "spritesheets",
+            "targetName": "dgame-example",
+            "targetType": "executable",
+            "sourceFiles": ["tutorials/spritesheets.d"]
+        },
+        {
+            "name": "tilemap",
+            "targetName": "dgame-example",
+            "targetType": "executable",
+            "sourceFiles": ["tutorials/tilemap.d"]
+        },
+        {
+            "name": "tilemap2",
+            "targetName": "dgame-example",
+            "targetType": "executable",
+            "sourceFiles": ["tutorials/tilemap2.d"]
+        }
+    ]
+}
