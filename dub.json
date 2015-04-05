@@ -105,7 +105,7 @@
             "sourceFiles": ["tutorials/spritesheets.d"]
         },
         {
-            "name": "tilemap",
+            "name": "tilemap1",
             "targetName": "dgame-example",
             "targetType": "executable",
             "sourceFiles": ["tutorials/tilemap.d"]
