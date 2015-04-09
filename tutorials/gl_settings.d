@@ -42,12 +42,12 @@ void main() {
                     break;
                     
                 case Event.Type.KeyDown:
-                    if (event.keyboard.key == Keyboard.Code.T) {
+                    if (event.keyboard.key == Keyboard.Key.T) {
                         if (qs.geometry == Geometry.Quad)
                             qs.geometry = Geometry.Triangle;
                         else
                             qs.geometry = Geometry.Quad;
-                    } else if (event.keyboard.key == Keyboard.Code.Space)
+                    } else if (event.keyboard.key == Keyboard.Key.Space)
                         circle.move(4, -4);
                     break;
                     

@@ -22,7 +22,7 @@ void main() {
                 case Event.Type.KeyDown:
                     writeln("Pressed key ", event.keyboard.key);
                     
-                    if (event.keyboard.key == Keyboard.Code.Esc)
+                    if (event.keyboard.key == Keyboard.Key.Esc)
                         running = false; // or: wnd.push(Event.Type.Quit);
                     
                 break;

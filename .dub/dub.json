@@ -4,8 +4,9 @@
 			"derelict-util": "1.9.1",
 			"dgame": "~master",
 			"derelict-sdl2": "1.9.4",
-			"m3": "0.0.6",
+			"m3": "0.0.7",
 			"derelict-gl3": "1.0.12"
 		},
+		"lastUpgrade": "2015-04-09T16:21:03.4761594"
 	}
 }

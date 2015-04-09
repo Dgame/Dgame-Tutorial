@@ -115,17 +115,17 @@ void main() {
                     case Event.Type.KeyDown:
                         writeln("Pressed key ", event.keyboard.key);
                         
-                        if (event.keyboard.key == Keyboard.Code.Esc)
+                        if (event.keyboard.key == Keyboard.Key.Esc)
                             running = false;
                         else if (!gravity) {
                             switch (event.keyboard.key) {
-                                case Keyboard.Code.Left:
+                                case Keyboard.Key.Left:
                                     player.move(MOVE * -1, 0);
                                     player.rotate(ROTATION * -1);
                                     writeln(player.getRotation());
                                     player.setTexture(player_left_tex);
                                 break;
-                                case Keyboard.Code.Right:
+                                case Keyboard.Key.Right:
                                     player.move(MOVE, 0);
                                     player.rotate(ROTATION);
                                     writeln(player.getRotation());
