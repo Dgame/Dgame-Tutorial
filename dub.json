@@ -108,7 +108,7 @@
             "name": "tilemap1",
             "targetName": "dgame-example",
             "targetType": "executable",
-            "sourceFiles": ["tutorials/tilemap.d"]
+            "sourceFiles": ["tutorials/tilemap1.d"]
         },
         {
             "name": "tilemap2",
