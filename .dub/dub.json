@@ -1,12 +1,12 @@
 {
 	"dub": {
 		"cachedUpgrades": {
-			"derelict-util": "1.9.1",
+			"derelict-util": "2.0.0",
 			"dgame": "~master",
-			"derelict-sdl2": "1.9.4",
+			"derelict-sdl2": "1.9.5",
 			"m3": "0.0.7",
-			"derelict-gl3": "1.0.12"
+			"derelict-gl3": "1.0.13"
 		},
-		"lastUpgrade": "2015-04-09T16:21:03.4761594"
+		"lastUpgrade": "2015-06-05T13:13:59.6839851"
 	}
 }

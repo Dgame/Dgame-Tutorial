@@ -21,7 +21,7 @@
             "sourceFiles": ["tutorials/battery.d"]
         },
         {
-            "name": "create_a_window",
+            "name": "create_window",
             "targetName": "dgame-example",
             "targetType": "executable",
             "sourceFiles": ["tutorials/create_a_window.d"]

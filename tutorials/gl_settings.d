@@ -6,11 +6,13 @@ import Dgame.Math;
 import Dgame.System;
 
 void main() {
-    Window wnd = Window(640, 480, "Dgame Test", Window.Style.Default, GLSettings(0, 0, 8));
+    const GLContextSettings gl_context_settings = GLContextSettings(GLContextSettings.AntiAlias.None, GLContextSettings.Version.GL30);
+    
+    Window wnd = Window(640, 480, "Dgame Test", Window.Style.Default);//, gl_context_settings);
     wnd.setVerticalSync(Window.VerticalSync.Enable);
     wnd.setClearColor(Color4b.Gray);
 
-    Shape qs = new Shape(Geometry.Quad, 
+    Shape qs = new Shape(Geometry.Quads, 
         [
             Vertex( 75,  75),
             Vertex(275,  75),
@@ -43,10 +45,10 @@ void main() {
                     
                 case Event.Type.KeyDown:
                     if (event.keyboard.key == Keyboard.Key.T) {
-                        if (qs.geometry == Geometry.Quad)
-                            qs.geometry = Geometry.Triangle;
+                        if (qs.geometry == Geometry.Quads)
+                            qs.geometry = Geometry.Triangles;
                         else
-                            qs.geometry = Geometry.Quad;
+                            qs.geometry = Geometry.Quads;
                     } else if (event.keyboard.key == Keyboard.Key.Space)
                         circle.move(4, -4);
                     break;

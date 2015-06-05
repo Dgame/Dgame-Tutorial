@@ -82,7 +82,7 @@ void main() {
 
     Spritesheet player = new Spritesheet(player_tex, Rect(0, 0, 32, 32));
     player.setPosition(start);
-    player.setCenter(16, 16);
+    player.setRotationCenter(16, 16);
 
     Font fnt = Font("samples/font/arial.ttf", 12);
     Text fps = new Text(fnt);

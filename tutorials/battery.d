@@ -31,7 +31,7 @@ void main() {
             }
         }
         
-        System.Battery battery = System.getBatteryInfo();
+        Battery battery = System.getBatteryInfo();
         
         curPower.format("%d seconds remain with %d %%. State: %s",
                         battery.seconds, battery.percent, battery.state);

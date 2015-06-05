@@ -9,7 +9,7 @@ import Dgame.System.Keyboard;
 void main() {
     Window wnd = Window(640, 480, "Dgame Test");
     
-    Shape qs = new Shape(Geometry.Quad, 
+    Shape qs = new Shape(Geometry.Quads, 
         [
             Vertex( 75,  75),
             Vertex(275,  75),
@@ -25,7 +25,7 @@ void main() {
     Shape circle = new Shape(25, Vector2f(180, 380));
     circle.setColor(Color4b.Green);
     
-    Shape many = new Shape(Geometry.Quad,
+    Shape many = new Shape(Geometry.Quads,
         [
             Vertex(55, 55),
             Vertex(60, 55),
@@ -64,10 +64,10 @@ void main() {
                     
                 case Event.Type.KeyDown:
                     if (event.keyboard.key == Keyboard.Key.T) {
-                        if (qs.geometry == Geometry.Quad)
-                            qs.geometry = Geometry.Triangle;
+                        if (qs.geometry == Geometry.Quads)
+                            qs.geometry = Geometry.Triangles;
                         else
-                            qs.geometry = Geometry.Quad;
+                            qs.geometry = Geometry.Quads;
                     } else if (event.keyboard.key == Keyboard.Key.Space)
                         circle.move(4, -4);
                     break;

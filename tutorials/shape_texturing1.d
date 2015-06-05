@@ -13,7 +13,7 @@ void main() {
     Texture wiki_tex = Texture(wiki_srfc);
     
     Shape texQuad = new Shape(
-        Geometry.Quad,
+        Geometry.Quads,
         [
             Vertex(  0,  0),
             Vertex(140,  0),
