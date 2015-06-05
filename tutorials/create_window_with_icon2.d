@@ -1,11 +1,12 @@
 import Dgame.Window.Window;
 import Dgame.Graphic.Surface;
+import Dgame.Graphic.Masks;
 import Dgame.System.StopWatch;
 
 void main() {
 	Window wnd = Window(640, 480, "Dgame Test");
 
-	uint[256] pixels = [
+	ushort[256] pixels = [
 		0x0fff, 0x0fff, 0x0fff, 0x0fff, 0x0fff, 0x0fff, 0x0fff, 0x0fff, 
 		0x0fff, 0x0fff, 0x0fff, 0x0fff, 0x0fff, 0x0fff, 0x0fff, 0x0fff, 
 		0x0fff, 0x0fff, 0x0fff, 0x0fff, 0x0fff, 0x0fff, 0x0fff, 0x0fff, 
@@ -40,7 +41,7 @@ void main() {
 		0x0fff, 0x0fff, 0x0fff, 0x0fff, 0x0fff, 0x0fff, 0x0fff, 0x0fff
 	];
 
-	Surface icon = Surface(pixels.ptr, 16, 16);
+	Surface icon = Surface(pixels.ptr, 16, 16, 16, Masks(0x0f00, 0x00f0, 0x000f, 0xf000));
 	wnd.setIcon(icon);
 	wnd.clear();
 	wnd.display();
