@@ -69,6 +69,12 @@
             "sourceFiles": ["tutorials/image_loading_and_sprites_bounce.d"]
         },
         {
+            "name": "limit_framerate",
+            "targetName": "dgame-example",
+            "targetType": "executable",
+            "sourceFiles": ["tutorials/limit_framerate.d"]
+        },
+        {
             "name": "load_font_draw_text",
             "targetName": "dgame-example",
             "targetType": "executable",
