@@ -121,6 +121,12 @@
             "targetName": "dgame-example",
             "targetType": "executable",
             "sourceFiles": ["tutorials/tilemap2.d"]
+        },
+        {
+            "name": "tilemap3",
+            "targetName": "dgame-example",
+            "targetType": "executable",
+            "sourceFiles": ["tutorials/tilemap2.d"]
         }
     ]
 }
