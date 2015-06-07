@@ -67,7 +67,7 @@ void main() {
     ubyte x, y;
     foreach (ubyte idx, char c; Tiles) {
         if (Tiles[idx] == 't')
-            tiles ~= va.append(Vector2f(x * TILE_SIZE, y * TILE_SIZE));
+            va.append(Vector2f(x * TILE_SIZE, y * TILE_SIZE));
         else if (Tiles[idx] == 'a')
             start = Vector2f(x * TILE_SIZE, y * TILE_SIZE);
         else if (Tiles[idx] == 'z')
@@ -102,7 +102,7 @@ void main() {
         if (sw.getElapsedTicks() > TICKS_PER_FRAME) {
             sw.reset();
 
-            const bool gravity = gravityEffect(tiles, player);
+            //const bool gravity = gravityEffect(tiles, player);
             
             while (wnd.poll(&event)) {
                 switch (event.type) {
