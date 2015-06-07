@@ -2,8 +2,11 @@ import std.stdio;
 
 import Dgame.Window;
 import Dgame.Graphic;
+import Dgame.Graphic.VertexArray;
 import Dgame.Math;
 import Dgame.System;
+
+enum bool USE_VA = true;
 
 enum ubyte MAP_WIDTH = 12;
 enum ubyte MAP_HEIGHT = 10;
@@ -43,7 +46,7 @@ bool gravityEffect(const Sprite[] tiles, Sprite player) pure nothrow {
 void main() {
     Window wnd = Window(MAP_WIDTH * TILE_SIZE, MAP_HEIGHT * TILE_SIZE, "Dgame Test");
 
-    // 0 = empty, a = start, t = (walkable) tile, b = brittle tile, z = target
+    // 0 = empty, a = start, t = tile, z = target
     const char[MAP_WIDTH * MAP_HEIGHT] Tiles = [
         '0', 'a', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0',
         '0', 't', 't', 't', 't', 't', '0', '0', 't', 't', 't', '0',
@@ -57,18 +60,25 @@ void main() {
         '0', '0', '0', 't', 't', 't', 't', 't', 't', 't', 't', 't',
     ];
 
-    Texture player_tex = Texture(Surface("Basti-Box.png"));
+    Texture player_left_tex = Texture(Surface("Basti-Box_Left.png"));
+    Texture player_right_tex = Texture(Surface("Basti-Box_Right.png"));
     Texture tile_tex = Texture(Surface("Tile.png"));
 
     Vector2f start, target;
 
-    VertexArray va = new VertexArray(Geometry.Quads, tile_tex);
+    static if (USE_VA)
+        VertexArray va = new VertexArray(Geometry.Quads, tile_tex);
+    else
+        Sprite[] tiles;
 
     ubyte x, y;
     foreach (ubyte idx, char c; Tiles) {
-        if (Tiles[idx] == 't')
-            va.append(Vector2f(x * TILE_SIZE, y * TILE_SIZE));
-        else if (Tiles[idx] == 'a')
+        if (Tiles[idx] == 't') {
+            static if (USE_VA)
+                va.appendQuad(Vector2f(x * TILE_SIZE, y * TILE_SIZE), Rect(0, 0, tile_tex.width, tile_tex.height));
+            else
+                tiles ~= new Sprite(tile_tex, Vector2f(x * TILE_SIZE, y * TILE_SIZE));
+        } else if (Tiles[idx] == 'a')
             start = Vector2f(x * TILE_SIZE, y * TILE_SIZE);
         else if (Tiles[idx] == 'z')
             target = Vector2f(x * TILE_SIZE, y * TILE_SIZE);
@@ -80,7 +90,16 @@ void main() {
         }
     }
 
-    Spritesheet player = new Spritesheet(player_tex, Rect(0, 0, 32, 32));
+    static if (USE_VA) {
+        import std.algorithm;
+        File f = File("vertices", "w+");
+        foreach (ref Vertex v; va.getVertices()) {
+            f.writeln(v);
+        }
+        f.close();
+    }
+
+    Sprite player = new Sprite(player_left_tex);
     player.setPosition(start);
     player.setRotationCenter(16, 16);
 
@@ -102,18 +121,15 @@ void main() {
         if (sw.getElapsedTicks() > TICKS_PER_FRAME) {
             sw.reset();
 
-            //const bool gravity = gravityEffect(tiles, player);
+            const bool gravity = false;//gravityEffect(tiles, player);
             
             while (wnd.poll(&event)) {
                 switch (event.type) {
                     case Event.Type.Quit:
-                        writeln("Quit Event");
                         running = false;
                     break;
                         
-                    case Event.Type.KeyDown:
-                        writeln("Pressed key ", event.keyboard.key);
-                        
+                    case Event.Type.KeyDown:                        
                         if (event.keyboard.key == Keyboard.Key.Esc)
                             running = false;
                         else if (!gravity) {
@@ -121,14 +137,12 @@ void main() {
                                 case Keyboard.Key.Left:
                                     player.move(MOVE * -1, 0);
                                     player.rotate(ROTATION * -1);
-                                    writeln(player.getRotation());
-                                    player.selectFrame(0);
+                                    player.setTexture(player_left_tex);
                                 break;
                                 case Keyboard.Key.Right:
                                     player.move(MOVE, 0);
                                     player.rotate(ROTATION);
-                                    writeln(player.getRotation());
-                                    player.selectFrame(1);
+                                    player.setTexture(player_right_tex);
                                 break;
                                 default: break;
                             }
@@ -157,7 +171,14 @@ void main() {
 
         wnd.draw(fps);
 
-        wnd.draw(va);
+        static if (USE_VA)
+            wnd.draw(va);
+        else {
+            foreach (Sprite tile; tiles) {
+                wnd.draw(tile);
+            }
+        }
+
         wnd.draw(player);
 
         wnd.display();
