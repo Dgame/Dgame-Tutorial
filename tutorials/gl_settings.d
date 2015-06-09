@@ -6,9 +6,11 @@ import Dgame.Math;
 import Dgame.System;
 
 void main() {
-    const GLContextSettings gl_context_settings = GLContextSettings(GLContextSettings.AntiAlias.None, GLContextSettings.Version.GL30);
+    GLContextSettings gl_settings;
+    gl_settings.antiAlias = GLContextSettings.AntiAlias.X4;
+    gl_settings.vers = GLContextSettings.Version.GL30;
     
-    Window wnd = Window(640, 480, "Dgame Test", Window.Style.Default);//, gl_context_settings);
+    Window wnd = Window(640, 480, "Dgame Test", Window.Style.Default, gl_settings);
     wnd.setVerticalSync(Window.VerticalSync.Enable);
     wnd.setClearColor(Color4b.Gray);
 
