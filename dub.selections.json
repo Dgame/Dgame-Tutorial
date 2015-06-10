@@ -2,7 +2,7 @@
 	"fileVersion": 1,
 	"versions": {
 		"derelict-util": "2.0.0",
-		"dgame": "~master",
+		"dgame": "0.6.0-beta.1",
 		"derelict-sdl2": "1.9.5",
 		"m3": "0.0.7",
 		"derelict-gl3": "1.0.13"

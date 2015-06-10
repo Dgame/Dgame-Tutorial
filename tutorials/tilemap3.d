@@ -1,12 +1,11 @@
 import std.stdio;
+import std.algorithm : filter, count;
 
 import Dgame.Window;
 import Dgame.Graphic;
 import Dgame.Graphic.VertexArray;
 import Dgame.Math;
 import Dgame.System;
-
-enum bool USE_VA = true;
 
 enum ubyte MAP_WIDTH = 12;
 enum ubyte MAP_HEIGHT = 10;
@@ -20,12 +19,12 @@ enum ubyte MAX_FPS = 60;
 enum ubyte TICKS_PER_FRAME = 1000 / MAX_FPS;
 
 @nogc
-bool isWalkable(const Sprite[] tiles, Sprite player) pure nothrow {
-    const Vector2i edge_pos = player.getClipRect().getEdgePosition(Rect.Edge.BottomLeft);
-    const Vector2f pos = edge_pos;
+bool isWalkable(const Rect[] quads, Sprite player) pure nothrow {
+    const Vector2f edge_pos = player.getClipRect().getEdgePosition(Rect.Edge.BottomLeft);
+    const Vector2i pos = edge_pos;
 
-    foreach (const Sprite tile; tiles) {
-        if (tile.getPosition() == pos)
+    foreach (ref const Rect quad; quads) {
+        if (quad.getPosition() == pos)
             return true;
     }
 
@@ -33,8 +32,8 @@ bool isWalkable(const Sprite[] tiles, Sprite player) pure nothrow {
 }
 
 @nogc
-bool gravityEffect(const Sprite[] tiles, Sprite player) pure nothrow {
-    if (!isWalkable(tiles, player)) {
+bool gravityEffect(const Rect[] quads, Sprite player) pure nothrow {
+    if (!isWalkable(quads, player)) {
         player.move(0, GRAVITY);
 
         return true;
@@ -66,18 +65,19 @@ void main() {
 
     Vector2f start, target;
 
-    static if (USE_VA)
-        VertexArray va = new VertexArray(Geometry.Quads, tile_tex);
-    else
-        Sprite[] tiles;
+    Rect[] quads;
+    quads.reserve(Tiles[].filter!(a => a == 't').count());
+
+    VertexArray va = new VertexArray(Geometry.Quads, tile_tex);
 
     ubyte x, y;
     foreach (ubyte idx, char c; Tiles) {
         if (Tiles[idx] == 't') {
-            static if (USE_VA)
-                va.appendQuad(Vector2f(x * TILE_SIZE, y * TILE_SIZE), Rect(0, 0, tile_tex.width, tile_tex.height));
-            else
-                tiles ~= new Sprite(tile_tex, Vector2f(x * TILE_SIZE, y * TILE_SIZE));
+            const Vector2f tilePos = Vector2f(x * TILE_SIZE, y * TILE_SIZE);
+            const Rect texRect = Rect(0, 0, tile_tex.width, tile_tex.height);
+
+            va.appendQuad(tilePos, texRect);
+            quads ~= Rect(cast(int) tilePos.x, cast(int) tilePos.y, texRect.width, texRect.height);
         } else if (Tiles[idx] == 'a')
             start = Vector2f(x * TILE_SIZE, y * TILE_SIZE);
         else if (Tiles[idx] == 'z')
@@ -88,15 +88,6 @@ void main() {
             x = 0;
             y++;
         }
-    }
-
-    static if (USE_VA) {
-        import std.algorithm;
-        File f = File("vertices", "w+");
-        foreach (ref Vertex v; va.getVertices()) {
-            f.writeln(v);
-        }
-        f.close();
     }
 
     Sprite player = new Sprite(player_left_tex);
@@ -118,11 +109,11 @@ void main() {
 
         fps.format("FPS: %d", sw_fps.getCurrentFPS());
 
+        immutable bool gravity = gravityEffect(quads, player);
+
         if (sw.getElapsedTicks() > TICKS_PER_FRAME) {
             sw.reset();
 
-            const bool gravity = false;//gravityEffect(tiles, player);
-            
             while (wnd.poll(&event)) {
                 switch (event.type) {
                     case Event.Type.Quit:
@@ -170,15 +161,7 @@ void main() {
         }
 
         wnd.draw(fps);
-
-        static if (USE_VA)
-            wnd.draw(va);
-        else {
-            foreach (Sprite tile; tiles) {
-                wnd.draw(tile);
-            }
-        }
-
+        wnd.draw(va);
         wnd.draw(player);
 
         wnd.display();
